@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Fullscreen Video</title>
+
+<style>
+body{
+margin:0;
+background:black;
+overflow:hidden;
+}
+
+video{
+width:100vw;
+height:100vh;
+object-fit:cover;
+}
+</style>
+
+</head>
+
+<body>
+
+<video id="fredbear" autoplay>
+<source src="video.mp4" type="video/mp4">
+</video>
+
+<script>
+
+// fullscreen function
+function goFullscreen(){
+if(!document.fullscreenElement){
+document.documentElement.requestFullscreen();
+}
+}
+
+// user click starts fullscreen
+document.addEventListener("click", goFullscreen);
+
+// if fullscreen exits → try again
+document.addEventListener("fullscreenchange", ()=>{
+if(!document.fullscreenElement){
+setTimeout(goFullscreen,500);
+}
+});
+
+// freeze video at last frame
+const video = document.getElementById("myVideo");
+
+video.addEventListener("ended", () => {
+video.pause();
+video.currentTime = video.duration;
+});
+
+</script>
+
+</body>
+</html>
