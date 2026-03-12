@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Fullscreen Video</title>
+<title>Video Trap</title>
 
 <style>
 body{
@@ -21,32 +21,32 @@ object-fit:cover;
 
 <body>
 
-<video id="fredbear" autoplay>
-<source src="YTDown.com_YouTube_FNAF-Anti-Piracy-Screen_Media_ArlGiczq7vg_001_240p.mp4" type="video/mp4">
+<video id="video" autoplay muted>
+<source src="" type="video/mp4">
 </video>
 
 <script>
 
-// fullscreen function
-function goFullscreen(){
+const video = document.getElementById("video");
+
+// enter fullscreen
+function forceFullscreen(){
 if(!document.fullscreenElement){
-document.documentElement.requestFullscreen();
+document.documentElement.requestFullscreen().catch(()=>{});
 }
 }
 
 // user click starts fullscreen
-document.addEventListener("click", goFullscreen);
+document.addEventListener("click", forceFullscreen);
 
-// if fullscreen exits → try again
-document.addEventListener("fullscreenchange", ()=>{
+// if user exits fullscreen → instantly try again
+document.addEventListener("fullscreenchange", () => {
 if(!document.fullscreenElement){
-setTimeout(goFullscreen,500);
+setTimeout(forceFullscreen,10);
 }
 });
 
-// freeze video at last frame
-const video = document.getElementById("myVideo");
-
+// freeze on the last frame
 video.addEventListener("ended", () => {
 video.pause();
 video.currentTime = video.duration;
