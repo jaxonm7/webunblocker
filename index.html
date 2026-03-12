@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Video Trap</title>
+<title>FNAF Anti Piracy</title>
 
 <style>
 body{
 margin:0;
 background:black;
 overflow:hidden;
+cursor:none;
 }
 
 video{
@@ -16,12 +17,11 @@ height:100vh;
 object-fit:cover;
 }
 </style>
-
 </head>
 
 <body>
 
-<video id="video" autoplay muted>
+<video id="video">
 <source src="YTDown.com_YouTube_FNAF-Anti-Piracy-Screen_Media_ArlGiczq7vg_001_240p.mp4" type="video/mp4">
 </video>
 
@@ -29,25 +29,23 @@ object-fit:cover;
 
 const video = document.getElementById("video");
 
+function startExperience(){
+
+// play video with sound
+video.play();
+
 // enter fullscreen
-function forceFullscreen(){
 if(!document.fullscreenElement){
 document.documentElement.requestFullscreen().catch(()=>{});
 }
+
 }
 
-// user click starts fullscreen
-document.addEventListener("click", forceFullscreen);
+// start everything on click
+document.addEventListener("click", startExperience, { once:true });
 
-// if user exits fullscreen → instantly try again
-document.addEventListener("fullscreenchange", () => {
-if(!document.fullscreenElement){
-setTimeout(forceFullscreen,10);
-}
-});
-
-// freeze on the last frame
-video.addEventListener("ended", () => {
+// freeze on the final frame
+video.addEventListener("ended", ()=>{
 video.pause();
 video.currentTime = video.duration;
 });
@@ -56,5 +54,3 @@ video.currentTime = video.duration;
 
 </body>
 </html>
-
-
